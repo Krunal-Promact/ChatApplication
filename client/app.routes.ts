@@ -11,3 +11,4 @@ export const APP_ROUTER_PROVIDERS = [
   provideRouter(routes),
   { provide: 'CanActivateForLoggedIn', useValue: () => !! Meteor.userId() }
 ];
+ 
