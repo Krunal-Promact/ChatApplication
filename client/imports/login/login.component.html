@@ -1,0 +1,17 @@
+
+  <form id="signup" class="signup">
+      <div>
+          <label for="emailAddress">Email Address</label>
+          <input type="email" name="emailAddress" [(ngModel)] = "login.email"  class="form-control" placeholder="Email Address">
+      </div>
+      <br>
+      <div>
+          <label for="password">Password</label>
+          <input type="password" name="password" class="form-control" [(ngModel)]="login.password" placeholder="Password">
+      </div>  
+      <br> 
+      <div>
+          <input type="submit" class="btn btn-success" value="Sign Up">
+          <button type="button" (click)="cancelUser()" >Cancel</button>
+      </div>   
+  </form>
