@@ -1,0 +1,19 @@
+<input type="button" (click)="LogOut()" value="Log Out">
+
+<center>
+    <h2><u> User List </u></h2>
+    
+    <table>
+        <tr>
+            <td>
+                <strong> All Users </strong> 
+            </td>
+        </tr>
+        <tr *ngFor="let user of users">
+            <td>
+                {{user.username}}
+            </td>
+        </tr>
+    </table>
+
+</center>
