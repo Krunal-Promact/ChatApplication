@@ -1,4 +1,5 @@
-<input type="button" (click)="LogOut()" value="Log Out">
+
+<logout></logout>
 
 <center>
     <h2><u> User List </u></h2>
@@ -10,10 +11,9 @@
             </td>
         </tr>
         <tr *ngFor="let user of users">
-            <td>
+            <td *ngIf="user.username != currentUser">
                 {{user.username}}
             </td>
         </tr>
     </table>
-
 </center>
