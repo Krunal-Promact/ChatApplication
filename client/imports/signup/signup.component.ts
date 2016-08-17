@@ -57,8 +57,7 @@ export class SignupComponent implements OnInit {
                 else 
                 {
                     Meteor.loginWithPassword(email, password);
-                    alert('You have successfully signed in');
-                    this.redirectionRoute.navigate(['/users']);
+                    alert('You have successfully signed in. Please login to continue');
                 }
             });
       }

@@ -1,0 +1,27 @@
+<logout></logout>
+
+<center>
+    <h2><u> Chat with {{user}} </u></h2>
+
+    <div *ngFor="let chat of chats">
+        <div *ngIf="currentUserId == chat.chatBetween.from">
+            <b>{{currentUser}} : </b>   {{chat.messages}}
+            <br/> {{chat.date | date: 'shortTime'}}
+        </div>
+        <div *ngIf="currentUserId == chat.chatBetween.to">
+            <b>{{user}} : </b>   {{chat.messages}}
+            <br/> {{chat.date | date: 'shortTime'}}
+        </div>
+    </div>
+
+    <form [formGroup]="messagesend" id="send"  (ngSubmit)="sendMessage()">
+          <div>
+              <label for="messages">Message</label>
+              <input type="text" formControlName="messages" class="form-control" placeholder=" Message">
+          </div> 
+          <br/> 
+          <div>
+              <input type="submit" class="btn btn-success" value="Send">
+          </div>   
+    </form>
+</center>

@@ -1,6 +1,6 @@
 
 <logout></logout>
-
+{{currentUser}}
 <center>
     <h2><u> User List </u></h2>
     
@@ -12,7 +12,7 @@
         </tr>
         <tr *ngFor="let user of users">
             <td *ngIf="user.username != currentUser">
-                {{user.username}}
+                <a [routerLink]="['/userdetail', user._id]">{{user.username}}</a>
             </td>
         </tr>
     </table>
