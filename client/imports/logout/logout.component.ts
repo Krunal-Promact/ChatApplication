@@ -27,3 +27,5 @@ export class LogoutComponent
       this.redirectionRoute.navigate(['/']);
     }
 }
+
+

@@ -6,7 +6,6 @@ function loggedIn() {
     return !!Meteor.user();
 }
 
-
 Chats.allow({
     insert: loggedIn,
     remove: loggedIn,
