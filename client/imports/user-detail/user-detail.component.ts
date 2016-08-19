@@ -22,10 +22,10 @@ export class UserDetailComponent implements OnInit
     fromid:any;
     toid:any;
     chats: Mongo.Cursor<Chat>;
-    messagesend: FormGroup;
+    messagesendform: FormGroup;
     currentUser: any;
     currentUserId: any;
- 
+    notToShow:any;
     constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) 
     {
     }
@@ -39,30 +39,31 @@ export class UserDetailComponent implements OnInit
             this.currentUser = Meteor.user().username;
             this.currentUserId = Meteor.userId();
 
+            this.notToShow=Meteor.users.findOne({_id:this.id})._id;
             this.fromid = Meteor.user()._id;
             this.toid = Meteor.users.findOne({_id: this.id})._id;
             console.log(this.user);
          });
-
-         this.chats = Chats.find({}, {sort: { date: 1 }} );                 //Apply query for particular FromUser and ToUser
-
-         this.messagesend = this.formBuilder.group({
+        //Apply query for particular FromUser and ToUser
+         this.chats = Chats.find({}, {sort: { date: 1 }} );                 
+         this.messagesendform = this.formBuilder.group({
            messages: []
          });
     }
 
     cancelUser() {
-        this.messagesend.controls['messages']['updateValue']('');
+        this.messagesendform.controls['messages']['updateValue']('');
     }
 
     sendMessage(){
-      if(this.messagesend.valid)
+      if(this.messagesendform.valid)
       {
-        var message = this.messagesend.controls['messages'].value;
+        var message = this.messagesendform.controls['messages'].value;
         console.log("Sent");
         Chats.insert({messages: message, date: new Date(), read: true, chatBetween:{from: this.fromid, to: this.toid}});
         this.cancelUser();
       }
     } 
 }
+ 
  

@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     }
 
     loginUser() {
+        debugger;
         if (this.loginForm.valid) {
             var email = this.loginForm.controls['emailAddress'].value;
             var password = this.loginForm.controls['password'].value;

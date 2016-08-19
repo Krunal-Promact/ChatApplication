@@ -59,6 +59,7 @@ export class SignupComponent implements OnInit {
                     Meteor.loginWithPassword(email, password);
                     alert('You have successfully signed in. Please login to continue');
                 }
+
             });
       }
    }

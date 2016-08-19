@@ -6,6 +6,7 @@ export interface Chat
      read:boolean;
      chatBetween:ChatBetween
 }
+
 export interface ChatBetween{
     _id?:string;
     from:string;

@@ -1,18 +1,18 @@
 
 <logout></logout>
-{{currentUser}}
+<u>{{currentUser}}</u>
 <center>
     <h2><u> User List </u></h2>
     
-    <table>
+    <table class="table table-hover">
         <tr>
-            <td>
-                <strong> All Users </strong> 
+            <td >
+              <center>  <strong> All Users </strong> </center>
             </td>
         </tr>
         <tr *ngFor="let user of users">
             <td *ngIf="user.username != currentUser">
-                <a [routerLink]="['/userdetail', user._id]">{{user.username}}</a>
+               <center>  <a [routerLink]="['/userdetail', user._id]">{{user.username}}</a></center>
             </td>
         </tr>
     </table>

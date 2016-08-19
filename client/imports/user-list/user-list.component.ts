@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { Meteor } from 'meteor/meteor';
@@ -17,14 +17,17 @@ export class UserListComponent implements OnInit
     users : Mongo.Cursor<any>;
     currentUser: any;
     
-    constructor(private redirectionRoute: Router) 
+    constructor(private redirectionRoute: Router, private ngZone: NgZone) 
     {
 
     }
 
     ngOnInit()
     {
-      this.users = Meteor.users.find({}, { sort: {username: 1} });
-      this.currentUser = Meteor.user().username;
+      this.ngZone.run(() => 
+      { 
+        this.users = Meteor.users.find({}, { sort: {username: 1} });
+        this.currentUser = Meteor.user().username;
+      });
     }
 }

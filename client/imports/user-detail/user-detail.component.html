@@ -1,27 +1,30 @@
 <logout></logout>
+<div class="container">
+    <div class="row">
+         <div class="form_bg">
 
-<center>
-    <h2><u> Chat with {{user}} </u></h2>
-
-    <div *ngFor="let chat of chats">
-        <div *ngIf="currentUserId == chat.chatBetween.from">
-            <b>{{currentUser}} : </b>   {{chat.messages}}
-            <br/> {{chat.date | date: 'shortTime'}}
-        </div>
-        <div *ngIf="currentUserId == chat.chatBetween.to">
-            <b>{{user}} : </b>   {{chat.messages}}
-            <br/> {{chat.date | date: 'shortTime'}}
-        </div>
+            <center><h2><u> {{user}} </u></h2></center>
+            <div *ngFor="let chat of chats">
+                <div *ngIf="currentUserId == chat.chatBetween.from  && (notToShow ==  chat.chatBetween.from || notToShow == chat.chatBetween.to)">
+                    <b>{{currentUser}} : </b>   {{chat.messages}}
+                    <br/> {{chat.date | date: 'shortTime'}}
+                </div>          
+                <div *ngIf="currentUserId == chat.chatBetween.to && (notToShow == chat.chatBetween.to || notToShow ==  chat.chatBetween.from)">
+                    <b>{{user}} : </b>   {{chat.messages}}
+                    <br/> {{chat.date | date: 'shortTime'}}
+                </div>
+            </div>
+            <br/>
+            <form [formGroup]="messagesendform" id="send"  (ngSubmit)="sendMessage()">
+                <div>
+                    <label for="messages">Message</label>
+                    <input type="text" formControlName="messages" class="form-control" placeholder=" Message">
+                </div> 
+                <br/> 
+                <div>
+                    <input type="submit" class="btn btn-success" value="Send">
+                </div>   
+            </form>
+         </div>
     </div>
-
-    <form [formGroup]="messagesend" id="send"  (ngSubmit)="sendMessage()">
-          <div>
-              <label for="messages">Message</label>
-              <input type="text" formControlName="messages" class="form-control" placeholder=" Message">
-          </div> 
-          <br/> 
-          <div>
-              <input type="submit" class="btn btn-success" value="Send">
-          </div>   
-    </form>
-</center>
+</div>
