@@ -43,22 +43,14 @@ export class UserListComponent implements OnInit
         this.users = Meteor.users.find({}, { sort: {username: 1} });
         this.currentUser = Meteor.user().username;
         this.currentUserId=Meteor.userId();
-        this.totalUsers = Meteor.users.find({}).count();
+        //this.totalUsers = Meteor.users.find({}).count();
+        //this.numofMessages=Chats.find({read:false,"chatBetween.to":this.currentUserId}).fetch();
+        //this.toid = Meteor.users.find({});
+        this.fromusers=Chats.find({read:false,"chatBetween.to":this.currentUserId}).map(function name(params)
+        {
+          return params.chatBetween.from;
+        });
 
-        this.numofMessages=Chats.find({read:false,"chatBetween.to":this.currentUserId}).fetch();
-       // this.totalMessages=this.numofMessages.length;
-       // this.usersArray= Meteor.users.find({}).fetch();
-       // for(var i=0;i<this.totalMessages;i++)
-        //{
-
-       // }
-       this.toid = Meteor.users.find({});
-       this.fromusers=Chats.find({read:false,"chatBetween.to":this.currentUserId}).map(function name(params) {
-         return params.chatBetween.from;
-       });
-       
-        //this.temp[0]= {fromId : this.fromusers[0], count: 0};
-        
         this.temp.push({id:this.fromusers[0],count:this.count});
         console.log(this.temp);
         this.fromusers.forEach(fromEle => 

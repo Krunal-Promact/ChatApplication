@@ -18,7 +18,7 @@
             <form [formGroup]="messagesendform" id="send"  (ngSubmit)="sendMessage()">
                 <div>
                     <label for="messages">Message</label>
-                    <input type="text" formControlName="messages" required class="form-control" placeholder=" Message">
+                    <input type="text" formControlName="messages" [(ngModel)]="message" required class="form-control" placeholder=" Message">
                 </div> 
                 <br/> 
                 <div>

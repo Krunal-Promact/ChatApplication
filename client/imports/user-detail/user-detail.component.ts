@@ -30,6 +30,7 @@ export class UserDetailComponent implements OnInit
     read:any;
     chatId:any;
     readchats : any[];
+    message:string;
 
     constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) 
     {
@@ -80,12 +81,22 @@ export class UserDetailComponent implements OnInit
     sendMessage(){
       if(this.messagesendform.valid)
       {
-        var message = this.messagesendform.controls['messages'].value;
-        console.log("Sent");
-        Chats.insert({messages: message, date: new Date(), read: false, chatBetween:{from: this.fromid, to: this.toid}});
-        this.cancelUser();
+   
+        if(this.message.trim().length== 0)
+        {
+          alert('Message Is Not Proper');
+        }
+        else
+        {
+      
+          var message = this.messagesendform.controls['messages'].value;
+          console.log("Sent");
+          Chats.insert({messages: message, date: new Date(), read: false, chatBetween:{from: this.fromid, to: this.toid}});
+          this.cancelUser();
+        }
       }
     } 
+    
 }
  
  
