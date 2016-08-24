@@ -9,7 +9,7 @@
                     <b>{{currentUser}} : </b>   {{chat.messages}}
                     <br/> {{chat.date | date: 'shortTime'}}
                 </div>          
-                <div *ngIf="currentUserId == chat.chatBetween.to && (notToShow == chat.chatBetween.to || notToShow ==  chat.chatBetween.from)">
+                <div *ngIf="currentUserId == chat.chatBetween.to && (notToShow == chat.chatBetween.to || notToShow ==  chat.chatBetween.from) && chat.read==true">
                     <b>{{user}} : </b>   {{chat.messages}}
                     <br/> {{chat.date | date: 'shortTime'}}
                 </div>
@@ -18,11 +18,12 @@
             <form [formGroup]="messagesendform" id="send"  (ngSubmit)="sendMessage()">
                 <div>
                     <label for="messages">Message</label>
-                    <input type="text" formControlName="messages" class="form-control" placeholder=" Message">
+                    <input type="text" formControlName="messages" required class="form-control" placeholder=" Message">
                 </div> 
                 <br/> 
                 <div>
                     <input type="submit" class="btn btn-success" value="Send">
+                    <a class="btn btn-secondary" [routerLink]="['/users']"> Back </a>
                 </div>   
             </form>
          </div>

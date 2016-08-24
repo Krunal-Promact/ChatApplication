@@ -18,6 +18,7 @@ import template from './user-detail.component.html';
 export class UserDetailComponent implements OnInit
 {
     user : any;
+    userId:any;
     id:any;
     fromid:any;
     toid:any;
@@ -26,8 +27,16 @@ export class UserDetailComponent implements OnInit
     currentUser: any;
     currentUserId: any;
     notToShow:any;
+    read:any;
+    chatId:any;
+    readchats : any[];
+
     constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) 
     {
+       this.messagesendform = this.formBuilder.group({
+          messages: ['', Validators.required],
+       });
+
     }
 
     ngOnInit()
@@ -38,12 +47,25 @@ export class UserDetailComponent implements OnInit
             this.user = Meteor.users.findOne({_id: this.id}).username;
             this.currentUser = Meteor.user().username;
             this.currentUserId = Meteor.userId();
-
             this.notToShow=Meteor.users.findOne({_id:this.id})._id;
             this.fromid = Meteor.user()._id;
             this.toid = Meteor.users.findOne({_id: this.id})._id;
+            this.readchats = Chats.find({read:false,"chatBetween.to":this.currentUserId,"chatBetween.from":this.toid}).fetch();
+
+            for(let i of this.readchats)
+            {
+              console.log(i._id);
+              Chats.update({_id:i._id},{$set:{read:true}},{multi:true});
+
+            }
+  
+     
+            console.log(this.readchats)
+            //this.read=Chats.update({_id:this.chatId},{read:true},{multi:true});
             console.log(this.user);
+            
          });
+
         //Apply query for particular FromUser and ToUser
          this.chats = Chats.find({}, {sort: { date: 1 }} );                 
          this.messagesendform = this.formBuilder.group({
@@ -60,7 +82,7 @@ export class UserDetailComponent implements OnInit
       {
         var message = this.messagesendform.controls['messages'].value;
         console.log("Sent");
-        Chats.insert({messages: message, date: new Date(), read: true, chatBetween:{from: this.fromid, to: this.toid}});
+        Chats.insert({messages: message, date: new Date(), read: false, chatBetween:{from: this.fromid, to: this.toid}});
         this.cancelUser();
       }
     } 
