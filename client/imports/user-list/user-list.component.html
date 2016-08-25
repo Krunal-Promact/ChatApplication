@@ -1,19 +1,15 @@
 
-<logout></logout><u>{{currentUser}}</u>
 <div class="container">
     <div class="row">
          <div class="form_bg">
-                
+                <strong class="pull-left">{{currentUser}}</strong>
+                <logout  class="pull-right"></logout><br/> 
+                <br/>
                 <center>
+                     
                 <h2><u> User List </u></h2>
-    
-                <table class="table table-hover">
-                    <tr>
-                        <td >
-                            <center>  <strong> All Users </strong> </center>
-                        </td>
-                    </tr>
-                   
+              
+                <table class="table table-hover">   
                     <tr *ngFor="let user of users">
                          
                         <td *ngIf="user.username != currentUser">

@@ -81,14 +81,8 @@ export class UserDetailComponent implements OnInit
     sendMessage(){
       if(this.messagesendform.valid)
       {
-   
-        if(this.message.trim().length== 0)
+        if(this.message.trim() !== '')
         {
-          alert('Message Is Not Proper');
-        }
-        else
-        {
-      
           var message = this.messagesendform.controls['messages'].value;
           console.log("Sent");
           Chats.insert({messages: message, date: new Date(), read: false, chatBetween:{from: this.fromid, to: this.toid}});
